@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h1>Quiz!</h1>
+    </div>
+    
+    <script>
+        const parent_verbs = {{parent_verbs|safe}}
+        const verbs = {{verbs|safe}}
+    </script>
+    <script src="{{url_for('static', filename='js/quiz.js')}}"></script>
+{% endblock %}

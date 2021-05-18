@@ -5,6 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from dotenv import load_dotenv
+import json
 
 app = Flask(__name__)
 
@@ -28,9 +29,22 @@ def verbs():
 @app.route("/display_verbs")
 def display_verbs():
     verbs = list(mongo.db.verbs.find())
+    parent = None
     if 'sound' in request.args:
         verbs = list(mongo.db.verbs.find({'sounds': request.args['sound']}))
-    return render_template("display_verbs.html", verbs=verbs) 
+        parent = request.args['parent']
+    return render_template("display_verbs.html", sound=request.args['sound'], verbs=verbs, parent=parent) 
+
+@app.route("/quiz")
+def quiz():
+    parent_verbs = list(mongo.db.verbs.find({'sounds': request.args['parent']}))
+    for verb in parent_verbs:
+        verb.pop('_id', None)
+    if 'sound' in request.args:
+        verbs = list(mongo.db.verbs.find({'sounds': request.args['sound']}))
+        for verb in verbs:
+            verb.pop('_id', None)
+    return render_template("quiz.html", parent_verbs=json.dumps(parent_verbs), verbs=json.dumps(verbs))
 
 
 if __name__ == "__main__":

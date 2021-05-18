@@ -9,12 +9,12 @@
         {% for sound in sounds %}
         <div class="row">
             <div class="col-12 col-md-1">
-                <a href="{{url_for('display_verbs', sound=sound.sound)}}" type="button" class="btn btn-outline-secondary btn-lg btn-block">{{sound.sound}}</a>
+                <a href="{{url_for('display_verbs', sound=sound.sound, parent=sound.sound)}}" type="button" class="btn btn-outline-secondary btn-lg btn-block">{{sound.sound}}</a>
             </div>
             {% for extended_sound in extended_sounds %}
             {% if extended_sound.parent == sound.sound %}
             <div class="col-12 col-md-1">
-                <a href="{{url_for('display_verbs', sound=extended_sound.extended_sound)}}" type="button" class="btn btn-outline-secondary btn-lg btn-block">{{extended_sound.extended_sound}}</a>
+                <a href="{{url_for('display_verbs', sound=extended_sound.extended_sound, parent=sound.sound)}}" type="button" class="btn btn-outline-secondary btn-lg btn-block">{{extended_sound.extended_sound}}</a>
             </div>
             {% endif %}
             {% endfor %}

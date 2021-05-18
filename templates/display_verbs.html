@@ -4,6 +4,9 @@
         {% for verb in verbs %}
         <p>{{ verb.korean }} - {{ verb.english }}</p>
         {% endfor %}
+        <div class="col-12 col-md-2">
+            <a href="{{url_for('quiz', sound=sound, parent=parent)}}" type="button" class="btn btn-outline-secondary btn-lg btn-block">Quiz</a>
+        </div>
     </div>
     
 {% endblock %}
