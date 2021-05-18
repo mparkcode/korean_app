@@ -16,9 +16,21 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-def get_tasks():
-    verbs = mongo.db.verbs.find()
-    return render_template("index.html", verbs=verbs)
+def home():
+    return render_template("index.html")
+
+@app.route("/verbs")
+def verbs():
+    sounds = list(mongo.db.sounds.find())
+    extended_sounds = list(mongo.db.extended_sounds.find())
+    return render_template("verbs.html", sounds=sounds, extended_sounds=extended_sounds) 
+
+@app.route("/display_verbs")
+def display_verbs():
+    verbs = list(mongo.db.verbs.find())
+    if 'sound' in request.args:
+        verbs = list(mongo.db.verbs.find({'sounds': request.args['sound']}))
+    return render_template("display_verbs.html", verbs=verbs) 
 
 
 if __name__ == "__main__":

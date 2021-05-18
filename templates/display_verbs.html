@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        {% for verb in verbs %}
+        <p>{{ verb.korean }} - {{ verb.english }}</p>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 col-md-2">
+                <a href="{{url_for('display_verbs')}}" type="button" class="btn btn-outline-secondary btn-lg btn-block">All Verbs</a>
+            </div>
+        </div>
+        {% for sound in sounds %}
+        <div class="row">
+            <div class="col-12 col-md-1">
+                <a href="{{url_for('display_verbs', sound=sound.sound)}}" type="button" class="btn btn-outline-secondary btn-lg btn-block">{{sound.sound}}</a>
+            </div>
+            {% for extended_sound in extended_sounds %}
+            <div class="col-12 col-md-1">
+                <a href="{{url_for('display_verbs', sound=extended_sound.extended_sound)}}" type="button" class="btn btn-outline-secondary btn-lg btn-block">{{extended_sound.extended_sound}}</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

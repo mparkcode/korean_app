@@ -1,5 +1,9 @@
+{% extends 'base.html' %}
 {% block content %}
-    {% for verb in verbs %}
-    <p>{{verb.english}} : {{verb.korean}}
-    {% endfor %}
+    <div class="container">
+        <div class="col-12 col-md-6">
+            <a href="{{url_for('verbs')}}" type="button" class="btn btn-outline-secondary btn-lg btn-block">Verbs</a>
+        </div>
+    </div>
+    
 {% endblock %}
